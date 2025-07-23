@@ -6,10 +6,10 @@
     <h5 class="mb-4 text-center">"COLISEO FIA - UNIVERSIDAD SAN MARTÍN DE PORRES / LA MOLINA"<br>DEL 23 AL 30 DE JULIO DEL 2025</h5>
 
     @foreach($tabla as $categoria => $series)
-    <h3 class="mt-5">{{ $categoria }}</h3>
+    <!-- <h3 class="mt-5">{{ $categoria }}</h3>-->
 
     @foreach($series as $serie => $equipos)
-    <h4 class="mt-3">Serie: {{ $serie }}</h4>
+    <h4 class="mt-3">Categoria: {{ $categoria }} - Serie: {{ $serie }}</h4>
 
     <div class="table-responsive mb-4">
         <table class="table table-bordered table-striped text-center">
