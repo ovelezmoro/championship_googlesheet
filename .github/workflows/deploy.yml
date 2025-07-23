@@ -33,8 +33,11 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           port: 22
           script: |
-            cd /var/www/html/championship_googlesheet
-            composer install --no-dev --optimize-autoloader
+            cd /var/www/html/championship_googlesheet/v1
+            COMPOSER_ALLOW_SUPERUSER=1 composer install --no-dev --optimize-autoloader
+            chmod 775 database
+            chmod 664 database/database.sqlite
+            chown www-data:www-data database database/database.sqlite
             php artisan migrate --force
             php artisan config:clear
             php artisan cache:clear
