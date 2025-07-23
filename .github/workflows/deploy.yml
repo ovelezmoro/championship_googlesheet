@@ -33,7 +33,7 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           port: 22
           script: |
-            cd /var/www/html/championship_googlesheet/v1
+            cd /var/www/html/championship_googlesheet
             COMPOSER_ALLOW_SUPERUSER=1 composer install --no-dev --optimize-autoloader
             chmod 775 database
             chmod 664 database/database.sqlite
