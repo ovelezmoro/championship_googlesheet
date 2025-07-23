@@ -15,7 +15,7 @@ jobs:
 
       # Paso 1: Sincronizar archivos con rsync (excluyendo .env y storage)
       - name: Deploy files via rsync
-        uses: burnett01/rsync-deployments@6.0
+        uses: burnett01/rsync-deployments@5.1  # Usa la versión estable más reciente
         with:
           switches: -avzr --delete --exclude=".env" --exclude="storage/"
           path: ./
