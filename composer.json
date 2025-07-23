@@ -52,9 +52,6 @@
             "dev-master": "11.x-dev"
         },
         "laravel": {
-            "providers": [
-                "Revolution\\Google\\Sheets\\Providers\\SheetsServiceProvider"
-            ],
             "dont-discover": []
         }
     },

@@ -8,3 +8,4 @@ Route::get('/', function () {
 });
 
 Route::get('/championship', [ChampionshipController::class, 'index']);
+Route::get('/championship/json', [ChampionshipController::class, 'json']);

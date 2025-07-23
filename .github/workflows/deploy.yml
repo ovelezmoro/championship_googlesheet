@@ -1,0 +1,42 @@
+name: Deploy Laravel via SSH and rsync
+
+on:
+  push:
+    branches:
+      - main  # Cambia si tu rama de producción es otra
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Paso 1: Sincronizar archivos con rsync (excluyendo .env y storage)
+      - name: Deploy files via rsync
+        uses: burnett01/rsync-deployments@6.0
+        with:
+          switches: -avzr --delete --exclude=".env" --exclude="storage/"
+          path: ./
+          remote_path: /var/www/html/championship_googlesheet
+          remote_host: ${{ secrets.SSH_HOST }}
+          remote_user: ${{ secrets.SSH_USER }}
+          remote_key: ${{ secrets.SSH_KEY }}
+
+      # Paso 2: Ejecutar comandos post-deploy en el servidor
+      - name: Run post-deploy commands
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          port: 22
+          script: |
+            cd /var/www/html/championship_googlesheet
+            composer install --no-dev --optimize-autoloader
+            php artisan migrate --force
+            php artisan config:clear
+            php artisan cache:clear
+            php artisan route:clear
+            php artisan view:clear
