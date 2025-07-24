@@ -19,6 +19,14 @@
             left: 8rem;
             background-color: white
         }
+
+        .logo-xs {
+            position: absolute;
+            width: 60px;
+            top: 0;
+            left: 0.5rem;
+            background-color: white;
+        }
     </style>
 </head>
 
@@ -27,7 +35,11 @@
         <div class="container-fluid">
             <img src="{{ asset('images/logo.png') }}"
                 alt="Logo"
-                class="me-2 bg-smtp logo">
+                class="me-2 bg-smtp logo d-none d-lg-block">
+
+            <img src="{{ asset('images/logo.png') }}"
+            alt="Logo"
+            class="me-2 bg-smtp logo-xs d-lg-none">
             <span class="navbar-brand mb-0 m-auto h1" style="font-size: 3erm">X COPA USMP 2025</span>
         </div>
     </nav>
