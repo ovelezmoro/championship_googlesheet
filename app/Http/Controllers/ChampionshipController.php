@@ -136,8 +136,8 @@ class ChampionshipController extends Controller
         foreach ($tabla as $cat => &$series) {
             foreach ($series as $serieKey => &$equipos) {
                 $equipos = collect($equipos)->map(function ($item) {
-                    $item['RS'] = $item['SC'] > 0 ? round($item['SF'] / $item['SC'], 2) : $item['SF'];
-                    $item['RP'] = $item['PC'] > 0 ? round($item['PF'] / $item['PC'], 2) : $item['PF'];
+                    $item['RS'] = $item['SF'] - $item['SC']; //$item['SC'] > 0 ? round($item['SF'] / $item['SC'], 2) : $item['SF'];
+                    $item['RP'] = $item['PF'] - $item['PC']; //$item['PC'] > 0 ? round($item['PF'] / $item['PC'], 2) : $item['PF'];
                     return $item;
                 })->sortByDesc('PTOS')->values();
 
