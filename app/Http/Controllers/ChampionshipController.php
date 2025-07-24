@@ -12,6 +12,16 @@ class ChampionshipController extends Controller
     const PUNTOS_DERROTA_1_2  = 1;
     const PUNTOS_DERROTA_0_2  = 0;
 
+    public function excel()
+    {
+        $data = Sheets::spreadsheet('1wwTVacYi8mx3t97SJ7vCjSXOwIH9FF0juOY5MVKNmME')
+            ->sheet('Hoja 2')
+            ->range('A2:R')
+            ->all();
+
+        return response()->json($data);
+    }
+
     public function json()
     {
         $tabla = $this->generarTabla();
@@ -79,12 +89,12 @@ class ChampionshipController extends Controller
             $sets_visita = intval($fila[8] ?? 0);  // Columna I
 
             // Puntos por set
-            $set1_local  = intval($fila[10] ?? 0); // Columna J 
-            $set1_visita = intval($fila[12] ?? 0); // Columna L
-            $set2_local  = intval($fila[13] ?? 0); // Columna M
-            $set2_visita = intval($fila[15] ?? 0); // Columna O
-            $set3_local  = intval($fila[16] ?? 0); // Columna P
-            $set3_visita = intval($fila[18] ?? 0); // Columna R
+            $set1_local  = intval($fila[9] ?? 0); // Columna J 
+            $set1_visita = intval($fila[11] ?? 0); // Columna L
+            $set2_local  = intval($fila[12] ?? 0); // Columna M
+            $set2_visita = intval($fila[14] ?? 0); // Columna O
+            $set3_local  = intval($fila[15] ?? 0); // Columna P
+            $set3_visita = intval($fila[17] ?? 0); // Columna R
 
             // Puntos tabla
             if ($sets_local === 2 && $sets_visita === 0) {

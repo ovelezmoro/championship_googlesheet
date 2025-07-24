@@ -9,3 +9,4 @@ Route::get('/', function () {
 
 Route::get('/championship', [ChampionshipController::class, 'index']);
 Route::get('/championship/json', [ChampionshipController::class, 'json']);
+Route::get('/championship/excel', [ChampionshipController::class, 'excel']);
