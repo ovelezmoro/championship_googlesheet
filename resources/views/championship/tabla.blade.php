@@ -19,6 +19,7 @@
                     <th>PJ</th>
                     <th>G</th>
                     <th>P</th>
+                    <th>SP</th>
                     <th>SF</th>
                     <th>SC</th>
                     <th>RS</th>
@@ -35,6 +36,7 @@
                     <td>{{ $row['PJ'] }}</td>
                     <td>{{ $row['G'] }}</td>
                     <td>{{ $row['P'] }}</td>
+                    <td>{{ $row['SP'] }}</td>
                     <td>{{ $row['SF'] }}</td>
                     <td>{{ $row['SC'] }}</td>
                     <td>{{ $row['RS'] }}</td>
