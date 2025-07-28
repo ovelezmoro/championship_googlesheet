@@ -142,6 +142,7 @@ class ChampionshipController extends Controller
                     $item['RP'] = $item['PF'] - $item['PC']; //$item['PC'] > 0 ? round($item['PF'] / $item['PC'], 2) : $item['PF'];
                     return $item;
                 })->sortBy([
+                           ['PTOS', 'desc'],
                            ['SP', 'desc'],
                            ['RS', 'desc'],
                            ['RP', 'desc']
