@@ -72,6 +72,7 @@ class ChampionshipController extends Controller
                         'PJ' => 0,
                         'G' => 0,
                         'P' => 0,
+                        'SP' => 0,
                         'SF' => 0,
                         'SC' => 0,
                         'PF' => 0,
@@ -136,12 +137,14 @@ class ChampionshipController extends Controller
         foreach ($tabla as $cat => &$series) {
             foreach ($series as $serieKey => &$equipos) {
                 $equipos = collect($equipos)->map(function ($item) {
+                    $item['SP'] = $item['G'] - $item['P'];
                     $item['RS'] = $item['SF'] - $item['SC']; //$item['SC'] > 0 ? round($item['SF'] / $item['SC'], 2) : $item['SF'];
                     $item['RP'] = $item['PF'] - $item['PC']; //$item['PC'] > 0 ? round($item['PF'] / $item['PC'], 2) : $item['PF'];
                     return $item;
                 })->sortBy([
-                           ['PTOS', 'desc'],
-                           ['PF', 'desc']
+                           ['SP', 'desc'],
+                           ['RS', 'desc'],
+                           ['RP', 'desc']
                            ])->values();
                 
                 //->sortByDesc('PTOS')->values();
