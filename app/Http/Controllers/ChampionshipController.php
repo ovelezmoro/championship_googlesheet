@@ -139,7 +139,12 @@ class ChampionshipController extends Controller
                     $item['RS'] = $item['SF'] - $item['SC']; //$item['SC'] > 0 ? round($item['SF'] / $item['SC'], 2) : $item['SF'];
                     $item['RP'] = $item['PF'] - $item['PC']; //$item['PC'] > 0 ? round($item['PF'] / $item['PC'], 2) : $item['PF'];
                     return $item;
-                })->sortByDesc('PTOS')->values();
+                })->sortBy([
+                           ['PTOS', 'desc'],
+                           ['PF', 'desc']
+                           ])->values();
+                
+                //->sortByDesc('PTOS')->values();
 
                 // Rank
                 foreach ($equipos as $i => &$equipo) {
