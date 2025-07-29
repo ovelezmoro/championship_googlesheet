@@ -28,7 +28,7 @@
 
                     {{-- Fecha --}}
                     <small class="text-muted d-block mb-2">
-                        {{ $p['FECHA'] ?? 'Por definirse' }}
+                        {{ $p['CAMPO'] ?? 'Por definirse' }}
                     </small>
 
                     {{-- Equipo Local con marcador --}}
