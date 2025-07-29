@@ -45,6 +45,7 @@ class ChampionshipController extends Controller
             $serie = $p['SERIE'] ?? 'SIN SERIE';
             $agrupado[$categoria][$serie][] = $p;
         }
+        ksort($agrupado);
 
         return view('championship.fixture', ['partidosPorCategoria' => $agrupado]);
     }
