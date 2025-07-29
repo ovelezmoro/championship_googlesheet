@@ -34,6 +34,21 @@ class ChampionshipController extends Controller
         return view('championship.tabla', compact('tabla'));
     }
 
+    public function fixture()
+    {
+        $partidos = $this->generarTablaSemifinales();
+
+        // Agrupar por categoría y serie
+        $agrupado = [];
+        foreach ($partidos as $p) {
+            $categoria = $p['CATEGORIA'] ?? 'SIN CATEGORIA';
+            $serie = $p['SERIE'] ?? 'SIN SERIE';
+            $agrupado[$categoria][$serie][] = $p;
+        }
+
+        return view('championship.fixture', ['partidosPorCategoria' => $agrupado]);
+    }
+
     public function generarTabla()
     {
         $data = Sheets::spreadsheet('1wwTVacYi8mx3t97SJ7vCjSXOwIH9FF0juOY5MVKNmME')
@@ -142,12 +157,12 @@ class ChampionshipController extends Controller
                     $item['RP'] = $item['PF'] - $item['PC']; //$item['PC'] > 0 ? round($item['PF'] / $item['PC'], 2) : $item['PF'];
                     return $item;
                 })->sortBy([
-                           ['PTOS', 'desc'],
-                           ['SP', 'desc'],
-                           ['RS', 'desc'],
-                           ['RP', 'desc']
-                           ])->values();
-                
+                    ['PTOS', 'desc'],
+                    ['SP', 'desc'],
+                    ['RS', 'desc'],
+                    ['RP', 'desc']
+                ])->values();
+
                 //->sortByDesc('PTOS')->values();
 
                 // Rank
@@ -158,5 +173,40 @@ class ChampionshipController extends Controller
         }
 
         return $tabla;
+    }
+
+    public function generarTablaSemifinales()
+    {
+        $data = Sheets::spreadsheet('1wwTVacYi8mx3t97SJ7vCjSXOwIH9FF0juOY5MVKNmME')
+            ->sheet('Hoja 4')
+            ->range('A2:R')
+            ->all();
+
+        $partidos = [];
+
+        foreach ($data as $fila) {
+            $partidos[] = [
+                'NRO'         => $fila[0] ?? '',
+                'CAMPO'       => $fila[1] ?? '',
+                'CATEGORIA'   => $fila[2] ?? '',
+                'SERIE'       => $fila[3] ?? '',
+                'LOCAL'       => $fila[4] ?? '',
+                'VISITA'      => $fila[5] ?? '',
+                'SETS_LOCAL'  => intval($fila[6] ?? 0),
+                'SETS_VISITA' => intval($fila[8] ?? 0),
+
+                // Sets individuales
+                'SET1_LOCAL'  => intval($fila[9] ?? 0),
+                'SET1_VISITA' => intval($fila[11] ?? 0),
+
+                'SET2_LOCAL'  => intval($fila[12] ?? 0),
+                'SET2_VISITA' => intval($fila[14] ?? 0),
+
+                'SET3_LOCAL'  => intval($fila[15] ?? 0),
+                'SET3_VISITA' => intval($fila[17] ?? 0),
+            ];
+        }
+
+        return $partidos;
     }
 }

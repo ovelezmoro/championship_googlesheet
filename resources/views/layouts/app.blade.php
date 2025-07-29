@@ -38,12 +38,36 @@
                 class="me-2 bg-smtp logo d-none d-lg-block">
 
             <img src="{{ asset('images/logo.png') }}"
-            alt="Logo"
-            class="me-2 bg-smtp logo-xs d-lg-none">
+                alt="Logo"
+                class="me-2 bg-smtp logo-xs d-lg-none">
             <span class="navbar-brand mb-0 m-auto h1" style="font-size: 3erm">X COPA USMP 2025</span>
         </div>
     </nav>
 
+    <nav class="mb-4 navbar navbar-expand-lg">
+        <div class="container">
+
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="m-auto navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link {{ request()->routeIs('fase.grupos') ? 'active' : '' }}" href="{{ route('fase.grupos') }}">
+                            Fase de Grupos
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {{ request()->routeIs('fase.semifinales') ? 'active' : '' }}" href="{{ route('fase.semifinales') }}">
+                            Semifinales
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
     <main class="container">
         @yield('content')
     </main>
