@@ -15,7 +15,7 @@ class ChampionshipController extends Controller
     public function excel()
     {
         $data = Sheets::spreadsheet('1wwTVacYi8mx3t97SJ7vCjSXOwIH9FF0juOY5MVKNmME')
-            ->sheet('Hoja 2')
+            ->sheet('JORNADAS')
             ->range('A2:R')
             ->all();
 
@@ -32,6 +32,28 @@ class ChampionshipController extends Controller
     {
         $tabla = $this->generarTabla(); // Usa tu lógica actual para generar la tabla
         return view('championship.tabla', compact('tabla'));
+    }
+
+    public function indexUpn()
+    {
+        $tabla = $this->generarTabla(); // Usa tu lógica actual para generar la tabla
+        return view('championship.upn.tabla', compact('tabla'));
+    }
+
+    public function fixtureUpn()
+    {
+        $partidos = $this->generarTablaSemifinales();
+
+        // Agrupar por categoría y serie
+        $agrupado = [];
+        foreach ($partidos as $p) {
+            $categoria = $p['CATEGORIA'] ?? 'SIN CATEGORIA';
+            $serie = $p['SERIE'] ?? 'SIN SERIE';
+            $agrupado[$categoria][$serie][] = $p;
+        }
+        ksort($agrupado);
+
+        return view('championship.fixture', ['partidosPorCategoria' => $agrupado]);
     }
 
     public function fixture()
@@ -53,7 +75,7 @@ class ChampionshipController extends Controller
     public function generarTabla()
     {
         $data = Sheets::spreadsheet('1wwTVacYi8mx3t97SJ7vCjSXOwIH9FF0juOY5MVKNmME')
-            ->sheet('Hoja 2')
+            ->sheet('JORNADAS')
             ->range('A2:R')
             ->all();
 
@@ -106,7 +128,7 @@ class ChampionshipController extends Controller
             $sets_visita = intval($fila[8] ?? 0);  // Columna I
 
             // Puntos por set
-            $set1_local  = intval($fila[9] ?? 0); // Columna J 
+            $set1_local  = intval($fila[9] ?? 0); // Columna J
             $set1_visita = intval($fila[11] ?? 0); // Columna L
             $set2_local  = intval($fila[12] ?? 0); // Columna M
             $set2_visita = intval($fila[14] ?? 0); // Columna O

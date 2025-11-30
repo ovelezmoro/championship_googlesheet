@@ -31,16 +31,16 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-dark mb-4" style="background-color: #bc1816;">
+    <nav class="navbar mb-4" style="background-color: #ffb912;">
         <div class="container-fluid">
-            <img src="{{ asset('images/logo.png') }}"
+            <img src="{{ asset('images/logo_upn.png') }}"
                 alt="Logo"
                 class="me-2 bg-smtp logo d-none d-lg-block">
 
-            <img src="{{ asset('images/logo.png') }}"
+            <img src="{{ asset('images/logo_upn.png') }}"
                 alt="Logo"
                 class="me-2 bg-smtp logo-xs d-lg-none">
-            <span class="navbar-brand mb-0 m-auto h1" style="font-size: 3erm">X COPA USMP 2025</span>
+            <span class="navbar-brand mb-0 m-auto h1" style="font-size: 3erm">X COPA UPN 2025</span>
         </div>
     </nav>
 
@@ -55,12 +55,17 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="m-auto navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link {{ request()->routeIs('fase.grupos') ? 'active' : '' }}" href="{{ route('fase.grupos') }}">
+                        <a class="nav-link {{ request()->routeIs('upn.configuration.teams') ? 'active' : '' }}" href="{{ route('fase.grupos') }}">
+                            Configuracion
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {{ request()->routeIs('upn.fase.grupos') ? 'active' : '' }}" href="{{ route('fase.grupos') }}">
                             Fase de Grupos
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {{ request()->routeIs('fase.semifinales') ? 'active' : '' }}" href="{{ route('fase.semifinales') }}">
+                        <a class="nav-link {{ request()->routeIs('upn.fase.semifinales') ? 'active' : '' }}" href="{{ route('fase.semifinales') }}">
                             Semifinales
                         </a>
                     </li>
