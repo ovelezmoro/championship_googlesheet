@@ -19,4 +19,9 @@ class ConfigurationController extends Controller
     {
         return view('championship.configuration.series');
     }
+
+    public function users()
+    {
+        return view('championship.configuration.users');
+    }
 }

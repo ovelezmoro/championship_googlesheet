@@ -4,9 +4,8 @@ use App\Http\Controllers\ChampionshipController;
 use \App\Http\Controllers\ConfigurationController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
+Route::view('/{any?}', 'welcome')->where('any', '.*');
 
 Route::get('/admin/teams', [ConfigurationController::class, 'teams'])->name('upn.configuration.teams');
 Route::get('/admin/series', [ConfigurationController::class, 'series'])->name('upn.configuration.series');
